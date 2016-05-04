@@ -46,4 +46,4 @@ mvn archetype:generate
 
 
 ## 包装 Axure开发的原型
-详见生成的原型项目的[README.md](https://github.com/zhoujianhui/cordova-axure-maven-archetype/test-cordova-axure-maven-archetype)介绍。
+详见生成的原型项目的[README.md](test-cordova-axure-maven-archetype/README.md)介绍。
