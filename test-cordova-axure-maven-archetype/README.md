@@ -11,28 +11,12 @@
 ###1、Wrap Axure Prototype
 Axure开发的原型存在如下问题：
 
-- 没有添加Mobile First相关的meta tag
+- 
+没有添加Mobile First相关的meta tag
 - 没有做到屏幕适配
 
-我们通过**axurecordovawrapper-maven-plugin**自动解决上述问题，同时它还能自动添加额外的资源文件,详细配置如下：
-```XML
-<configuration>
-    <wrapperPath>www/lib</wrapperPath>
-    <wrapFileSets>
-        <wrapFileSet>
-            <directory>www</directory>
-            <includes>
-                <include>**/*.html</include>
-            </includes>
-            <needScaleScreen>true</needScaleScreen>
-            <extraFiles>
-                <extraFile>www/app.js</extraFile>
-                <extraFile>www/core/core.js</extraFile>
-                <extraFile>www/core/core.boot.js</extraFile>
-            </extraFiles>
-        </wrapFileSet>
-    </wrapFileSets>
-</configuration>
+我们通过**axurecordovawrapper-maven-plugin**自动解决上述问题。它会自动添加angular.min.js引用和包装器axure-cordova-wrapper.min.js引用（内置屏幕适配指令scaleScreen），同时它还能自动添加额外的资源文件，详细配置如下：
+```xml
 <executions>
     <execution>
         <id>wrap-html-file</id>
@@ -40,6 +24,23 @@ Axure开发的原型存在如下问题：
         <goals>
             <goal>wrap</goal>
         </goals>
+        <configuration>
+            <wrapperPath>www/lib</wrapperPath>
+            <wrapFileSets>
+                <wrapFileSet>
+                    <directory>www</directory>
+                    <includes>
+                        <include>**/*.html</include>
+                    </includes>
+                    <needScaleScreen>true</needScaleScreen>
+                    <extraFiles>
+                        <extraFile>test-cordova-axure-maven-archetype.js</extraFile>
+                        <extraFile>core/core.js</extraFile>
+                        <extraFile>core/core.boot.js</extraFile>
+                    </extraFiles>
+                </wrapFileSet>
+            </wrapFileSets>
+        </configuration>
     </execution>
 </executions>
 ```
@@ -48,21 +49,44 @@ Axure开发的原型存在如下问题：
 
 ![wrap-axure-prototype](http://zhoujianhui.bitbucket.org/cordova/cordova-axure-prototype-wrap.png)
 
+**PS**如果你的Axure开发的原型是SPA单页面应用的话，需要包装的html页面仅需配置为首页：
+```xml
+<configuration>
+    ...
+    <includes>
+        <include>index.html</include>
+    </includes>
+    ...
+</configuration>    
+```
+
 ###2、Build Cordova Project
 整个构建过程可以参考**cordova-ionic-maven-archetype**生成的项目中的**README.md**.
 
 
 ##Add Custom Business To Prototype
 Axure开发的原型项目有可能需要添加业务功能尤其是和手机交互的功能，比如：拍照，扫码等。我们推荐使用**AngularJS**进行开发。
-目前我们内置了一个sayHello的示例，它位于**dummy/dummy.controller.js**,将其注入到test-cordova-axure-maven-archetype.js中,然后在index.html引用即可。
-```JavaScript
+目前我们内置了一个sayHello的示例，它位于**dummy/dummy.controller.js**。
+首先将其注入到test-cordova-axure-maven-archetype.js中：
+```js
 angular.module("test-cordova-axure-maven-archetype", [
     "test-cordova-axure-maven-archetype.core",
     "test-cordova-axure-maven-archetype.dummy"]);
 ```
+然后在axurecordovawrapper-maven-plugin的配置中添加额外的资源文件：
+```xml
+<configuration>
+    ...
+    <extraFiles>
+        <extraFile>dummy/dummy.controller.js</extraFile>
+    </extraFiles>
+    ...
+</configuration>    
+```
+执行wrap-axure-prototype即可
 
 如何使用sayHello方法，参见如下代码
-```HTML
+```html
 <body ng-controller="dummyController as dummy">
     <input type="text" ng-model="dummy.name">
     <input type="button" value="Say Hello" ng-click="dummy.sayHello(dummy.name)">
