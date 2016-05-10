@@ -65,7 +65,7 @@ Axure开发的原型存在如下问题：
 
 
 ##Add Custom Business To Prototype
-Axure开发的原型项目有可能需要添加业务功能尤其是和手机交互的功能，比如：拍照，扫码等。我们推荐使用**AngularJS**进行开发。
+Axure开发的原型项目有可能需要添加业务功能尤其是和手机交互的功能，比如：拍照，扫码等。我们推荐使用**AngularJS**并遵循[Angular 1 Style Guide](https://github.com/johnpapa/angular-styleguide/tree/master/a1)进行开发。
 目前我们内置了一个sayHello的示例，它位于**dummy/dummy.controller.js**。
 首先将其注入到test-cordova-axure-maven-archetype.js中：
 ```js
