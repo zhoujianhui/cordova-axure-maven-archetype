@@ -61,7 +61,7 @@ Axure开发的原型存在如下问题：
 ```
 
 ###2、Build Cordova Project
-整个构建过程可以参考**cordova-ionic-maven-archetype**生成的项目中的**README.md**.
+整个构建过程可以参考**cordova-ionic-maven-archetype**生成的项目中的**(README.md)[https://github.com/zhoujianhui/cordova-ionic-maven-archetype/blob/master/test-cordova-ionic-maven-archetype/README.md]**.
 
 
 ##Add Custom Business To Prototype
