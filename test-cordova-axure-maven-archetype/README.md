@@ -104,3 +104,6 @@ angular.module("test-cordova-axure-maven-archetype", [
 
 2、生成APP首页出现Axure的页面导航栏
 Axure导出的原型中的index.html中含有导航栏，推荐删除此index.html将真正的首页html文件重命名为index.html
+
+3、出现重复的状态栏
+Axure的模版自带了状态栏，但是我们需要装到手机上，所以此处应去掉Axure的状态栏，让APP显示手机自己的状态栏
